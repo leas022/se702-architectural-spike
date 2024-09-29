@@ -4,21 +4,43 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-	//public static Action OnTargetHit;
-
 	void Start()
 	{
-		RandomizePosition();
+		StartCoroutine(DestroyTarget());
 	}
 
-	public void Hit()
+	void Update()
 	{
-		RandomizePosition();
-		//OnTargetHit?.Invoke();
+		if (AimTask.isTaskStart != true)
+		{
+			Destroy(gameObject);
+		}
 	}
 
-	void RandomizePosition()
+	IEnumerator DestroyTarget()
 	{
-		transform.position = TargetBounds.Instance.GetRandomPosition();
+		yield return new WaitForSeconds(2);
+		AimTask.targetsMissed = AimTask.targetsMissed + 1;
+		if (AimTask.isTaskStart == true)
+		{
+			AimTask.instance.SpawnTargets();
+		}
+		if (gameObject != null)
+        {
+			Destroy(gameObject);
+		}
+    }
+
+	private void OnMouseDown()
+    {
+		AimTask.targetsHit = AimTask.targetsHit + 1;
+		if (gameObject != null)
+		{
+			Destroy(gameObject);
+		}
+		if (AimTask.isTaskStart == true)
+		{
+			AimTask.instance.SpawnTargets();
+		}
 	}
 }
