@@ -11,9 +11,8 @@ public class AimTask : MonoBehaviour
     public static AimTask instance;
     public static bool isTaskStart;
     public static bool isStartSpawn;
-    public static int targetsHit = 1, targetsMissed = 1, accuracy;
-
-    public TextMeshProUGUI TargetsHitLbl, TargetsMissLbl;
+    public static int targetsShown = 0;
+    public static int maxTargets = 10;
 
     public GameObject instructionCanvas;
 
@@ -32,23 +31,11 @@ public class AimTask : MonoBehaviour
         if (isTaskStart == true)
         {
             // If game has started  & starting point is false
-
-            Debug.Log("Next Task Canvas Active: " + instructionCanvas.activeSelf);
-
             if (isStartSpawn != true)
             {
-                DataLogger.Instance.StartTiming();
                 SpawnTargets();
                 isStartSpawn = true;
             }
-
-            // Update labels
-            TargetsHitLbl.text = "Hit: " + (targetsHit - 1);
-            TargetsMissLbl.text = "Miss: " + (targetsMissed - 1);
-
-            int sum = targetsHit + targetsMissed;
-            // Data to be exported into csv function
-            accuracy = targetsHit * 100 / sum;
         }
         else
         {
@@ -56,8 +43,6 @@ public class AimTask : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 // Press 1 to start the task
-                TargetsHitLbl.text = "Hit: 0";
-                TargetsMissLbl.text = "Miss: 0";
                 isTaskStart = true;
                 instructionCanvas.SetActive(false);
                 gameUICanvas.SetActive(true);
@@ -66,9 +51,37 @@ public class AimTask : MonoBehaviour
         }
     }
 
+    IEnumerator WaitAndSpawn()
+    {
+        // Wait a random period of time from 1s to 3s
+        float waitTime = Random.Range(1f, 3f);
+        Debug.Log("Waiting for " + waitTime + " seconds");
+
+        yield return new WaitForSeconds(waitTime);
+
+        // Spawn the target
+        targetsShown++;
+        Debug.Log("Spawning target " + targetsShown);
+        Instantiate(targetPrefab, TargetBounds.Instance.GetRandomPosition(), Quaternion.identity);
+        DataLogger.Instance.StartTiming();
+    }
+
     public void SpawnTargets()
     {
-        Instantiate(targetPrefab, TargetBounds.Instance.GetRandomPosition(), Quaternion.identity);
+        Debug.Log("Spawning targets");
+        // Stop the game once we've shown all the targets
+        if (targetsShown >= maxTargets)
+        {
+            // End the task and reset the game state
+            isTaskStart = false;
+            isStartSpawn = false;
+            targetsShown = 0;
+            instructionCanvas.SetActive(true);
+            gameUICanvas.SetActive(false);
+            return;
+        }
+
+        StartCoroutine(WaitAndSpawn());
     }
 
 }
