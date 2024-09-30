@@ -56,5 +56,5 @@ _Figure 1: Demonstration of the 'Water' Scene Environment_
 
 ## Scenes
 
-- **Air Scene**: Simulates natural terrain interactions, with a focus on vegetation physics and user input responses.
-- **Water Scene**: Focuses on water simulation, including buoyancy and fluid dynamics.
+- **Air Scene**: Simulates a normal walking environment, with no restrictions on movement speed or acceleration.
+- **Water Scene**: Simulates a waterlogged environment, with disctinct visual and reduced movement speed.
