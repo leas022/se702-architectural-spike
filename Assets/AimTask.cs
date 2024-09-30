@@ -30,7 +30,6 @@ public class AimTask : MonoBehaviour
         isStartSpawn = false;
         instance = this;
         lastPosition = character.transform.position; 
-        Debug.Log("AimTask started. Waiting for input to begin.");
     }
 
     public void Update()
@@ -72,7 +71,6 @@ public class AimTask : MonoBehaviour
         while (!playerMoving)
         {
             yield return null; 
-
 
             lastPosition = character.transform.position; 
         }

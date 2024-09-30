@@ -19,6 +19,7 @@ public class TargetBounds : MonoBehaviour
     void Update()
     {
 		Vector3 newPosition = player.position + player.forward * distanceInFront;
+		Debug.Log(newPosition);
 		transform.position = newPosition; 
     }
 
