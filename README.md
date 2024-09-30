@@ -29,7 +29,7 @@ To run the Unity project, you’ll need:
 
 ## 🗃️ Project structure
 
-- [`Assets/`](/Assets/): Contains all game objects, scripts, and resources.
+- [`Assets/`](/Assets/): Contains all game objects, scripts and resources.
 
 <!-- 
 - Scenes: Houses the two primary scenes: `Grass` and `Water`.
