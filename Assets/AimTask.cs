@@ -15,9 +15,9 @@ public class AimTask : MonoBehaviour
 
     public TextMeshProUGUI TargetsHitLbl, TargetsMissLbl;
 
-    public GameObject instructionCanvas; 
+    public GameObject instructionCanvas;
 
-    public GameObject gameUICanvas; 
+    public GameObject gameUICanvas;
 
     public void Start()
     {
@@ -28,7 +28,7 @@ public class AimTask : MonoBehaviour
     }
 
     public void Update()
-    {   
+    {
         if (isTaskStart == true)
         {
             // If game has started  & starting point is false
@@ -37,20 +37,21 @@ public class AimTask : MonoBehaviour
 
             if (isStartSpawn != true)
             {
+                DataLogger.Instance.StartTiming();
                 SpawnTargets();
                 isStartSpawn = true;
             }
 
             // Update labels
             TargetsHitLbl.text = "Hit: " + (targetsHit - 1);
-            TargetsMissLbl.text = "Miss: "+ (targetsMissed - 1);
+            TargetsMissLbl.text = "Miss: " + (targetsMissed - 1);
 
             int sum = targetsHit + targetsMissed;
             // Data to be exported into csv function
             accuracy = targetsHit * 100 / sum;
         }
         else
-        {   
+        {
             isStartSpawn = false;
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
@@ -69,4 +70,5 @@ public class AimTask : MonoBehaviour
     {
         Instantiate(targetPrefab, TargetBounds.Instance.GetRandomPosition(), Quaternion.identity);
     }
+
 }

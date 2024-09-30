@@ -8,7 +8,24 @@ using UnityEngine.SceneManagement;
 
 public class DataLogger : MonoBehaviour
 {
+    public static DataLogger Instance { get; private set; }
     private string filePath;
+    private double startTime;
+
+    // Use a singleton pattern
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            // Persist across scenes
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +40,13 @@ public class DataLogger : MonoBehaviour
         }
     }
 
-    void CreateCSV()
+    public void StartTiming()
+    {
+        // Start the timer
+        startTime = Time.realtimeSinceStartup;
+    }
+
+    private void CreateCSV()
     {
         // Create a new CSV file
         using (StreamWriter writer = new StreamWriter(filePath, true))
@@ -35,15 +58,21 @@ public class DataLogger : MonoBehaviour
         }
     }
 
-    void LogValue(double value)
+
+    public void WriteTime()
     {
+        // End the timer
+        double endTime = Time.realtimeSinceStartup;
+
+        double reactionTime = endTime - startTime;
+
         // The current scene
         Scene scene = SceneManager.GetActiveScene();
 
         // Log the reaction time to the CSV file
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
-            writer.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "," + scene.name + "," + value);
+            writer.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "," + scene.name + "," + reactionTime.ToString("F4", CultureInfo.InvariantCulture));
             writer.Flush();
             writer.Close();
         }
@@ -52,12 +81,6 @@ public class DataLogger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO: Change this once we have a reaction time implementation
-        // Detect if the 'P' key is pressed
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            // Log a reaction time value to the CSV file
-            LogValue(0.5);
-        }
+        // Nothing needs to be done here
     }
 }

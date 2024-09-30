@@ -26,14 +26,16 @@ public class Target : MonoBehaviour
 			AimTask.instance.SpawnTargets();
 		}
 		if (gameObject != null)
-        {
+		{
 			Destroy(gameObject);
 		}
-    }
+	}
 
 	private void OnMouseDown()
-    {
+	{
+		DataLogger.Instance.WriteTime();
 		AimTask.targetsHit = AimTask.targetsHit + 1;
+
 		if (gameObject != null)
 		{
 			Destroy(gameObject);
@@ -41,6 +43,7 @@ public class Target : MonoBehaviour
 		if (AimTask.isTaskStart == true)
 		{
 			AimTask.instance.SpawnTargets();
+			DataLogger.Instance.StartTiming();
 		}
 	}
 }
