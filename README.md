@@ -1,60 +1,45 @@
-# SE702: Implementation
+# Embodiment and Reaction Time
 
-This repository covers the unity implementation for our SE702 study, showcasing environmental interactions with two primary scenes: **Air** and **Water**. The focus is on testing interactions within different environments, designed to simulate specific physical properties and measuring user's reaction time and feelings of embodiment across the two secenes. The user study protocol pertaining to this implementation can be found [here](https://docs.google.com/document/d/1mpcQkzV3XXXwH2mWLcpXabVgCbIsed2JqPSplnRSHes/edit?usp=sharing).
+[SOFTENG 702 *Advanced Human–Computer Interaction*](https://courseoutline.auckland.ac.nz/dco/course/SOFTENG/702), Semester Two 2024.
 
-## Setting Up and Running the Project
+This repository is part of the [Protocol and Implementation](https://canvas.auckland.ac.nz/courses/105865/assignments/399018#submit) for Project B2.
 
-### Installation
+## Project background
 
-Follow these steps to get the project up and running:
+![Screenshot of **Water** scene](image/README/1723948782421.png "Screenshot of Water scene")
 
-1. **Get the [Unity Student Plan](https://unity.com/products/unity-student)**  
-   Access Unity's student plan for free by following the link and signing up.
+This is the implementation for a SOFTENG 702 study, whose intention is to test whether interactions in different physical media affects participant’s reaction time. There are two scenes—one in **air** and one in **water**—which simulate the physical properties of these media.
 
-2. **Install Unity Hub**  
-   Download and install Unity Hub from [here](https://unity.com/download) if you don't have it already
+This code is accompanied by a [user study protocol](https://docs.google.com/document/d/1mpcQkzV3XXXwH2mWLcpXabVgCbIsed2JqPSplnRSHes).
 
-3. **Install Unity Editor v2020.3.48**  
-   - Find version **2020.3.48** on the Unity Hub 'Installs' tab or install it from the web [here](https://unity.com/releases/editor/whats-new/2020.3.48]())
-   - Make sure to install the appropriate modules based on your operating system (Mac, Windows etc).
+## ✅ Prerequisites
 
-### Running the Project
+To run the Unity project, you’ll need:
 
-_Insert Runtime Information Here..._
+- A system capable of running a (relatively simple) Unity project.
+- **[Unity](https://unity.com/download), with an active [Unity plan](https://unity.com/products).** This includes [Unity Hub](https://unity.com/unity-hub) and Unity Editor version 2020.3.28. If you’re a student, you’re probably eligible for the free [Unity Student Plan](https://unity.com/products/unity-student).
 
-<!-- 
+## 🖱️ Set-up and run
 
-4. **Open the Project in Unity Hub**  
-   - Clone the project to your local machine.
-   - Open Unity Hub and select `Add`.
-   - Find the project root folder on your disk and select it. Unity Hub will recognize and load it into the project list.
+1. Clone this repo and open the project root with Unity Hub. (**Projects** tab → **Add** → **Add project from disk**.)
+1. Once the Unity Editor has loaded in Unity Hub, click **Open** open it with Unity Editor.
+1. Navigate to the [`Scenes/`](/Assets/Scenes/) subfolder, and select either the **Air** or **Water** scene.
+1. The participant can press <kbd>1</kbd> (**not** on the number pad) to start the task. This instruction is included on-screen for the participant.
+1. After a task has been completed, a CSV file will be written to the [`Logging/`](/Logging) folder with the data for statistical analysis.
 
-5. **Opening a Scene in the Unity Editor**  
-   - Once the project is loaded in Unity Hub, click `Open` to launch the Unity Editor with this project.
-   - To open a scene:
-     1. In the Unity Editor, go to the top menu and select `File > Open Scene`.
-     2. Navigate to the `Scenes` sub-folder.
-     3. Select either the **Air** scene or the **Water** scene, depending on which environment the user has been assigned to experience first.
+<!-- 👷 Insert runtime information here 🚧 -->
 
-    Both scenes simulate distinct environmental physics and are part of the Implementation.
+## 🗃️ Project structure
 
+- [`Assets/`](/Assets/): Contains all game objects, scripts and resources.
+
+<!--
+- Scenes: Houses the two primary scenes: `Grass` and `Water`.
+- Scripts: Contains the core logic for interacting with the environments.
+- Prefabs: Pre-configured game objects that can be reused across scenes.
 -->
 
-![Project Screenshot](image/README/1723948782421.png)
-_Figure 1: Demonstration of the 'Water' Scene Environment_
+## 🎬 Scenes
 
-## Project Structure
-
-- **Assets**: Contains all game objects, scripts, and resources.
-
-<!-- 
-- **Scenes**: Houses the two primary scenes: `Grass` and `Water`.
-- **Scripts**: Contains the core logic for interacting with the environments.
-- **Prefabs**: Pre-configured game objects that can be reused across scenes. 
-
--->
-
-## Scenes
-
-- **Air Scene**: Simulates a normal walking environment, with no restrictions on movement speed or acceleration.
-- **Water Scene**: Simulates a waterlogged environment, with disctinct visual and reduced movement speed.
+- **Air Scene**. Simulates a normal walking environment, with no restrictions on movement speed or acceleration.
+- **Water Scene**. Simulates a waterlogged environment, with distinct visual and reduced movement speed.
