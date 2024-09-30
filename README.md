@@ -31,14 +31,13 @@ To run the Unity project, you’ll need:
 
 - [`Assets/`](/Assets/): Contains all game objects, scripts and resources.
 
-<!-- 
+<!--
 - Scenes: Houses the two primary scenes: `Grass` and `Water`.
 - Scripts: Contains the core logic for interacting with the environments.
-- Prefabs: Pre-configured game objects that can be reused across scenes. 
+- Prefabs: Pre-configured game objects that can be reused across scenes.
 -->
 
 ## 🎬 Scenes
 
 - **Air Scene**. Simulates a normal walking environment, with no restrictions on movement speed or acceleration.
 - **Water Scene**. Simulates a waterlogged environment, with distinct visual and reduced movement speed.
-
