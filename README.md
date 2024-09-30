@@ -23,7 +23,7 @@ To run the Unity project, you’ll need:
 
 1. Clone this repo and open the project root with Unity Hub. (**Projects** tab → **Add** → **Add project from disk**.)
 1. Once the Unity Editor has loaded in Unity Hub, click **Open** open it with Unity Editor.
-1. Navigate to the `Scenes/` subfolder, and select either the **Air** or **Water** scene.
+1. Navigate to the [`Scenes/`](/Assets/Scenes/) subfolder, and select either the **Air** or **Water** scene.
 
 <!-- 👷 Insert runtime information here 🚧 -->
 
