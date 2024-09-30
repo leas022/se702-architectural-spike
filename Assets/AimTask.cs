@@ -5,7 +5,7 @@ using TMPro;
 
 public class AimTask : MonoBehaviour
 {
-    [SerializeField] Camera cam;
+    [SerializeField] Camera cam; 
 
     public GameObject targetPrefab;
     public static AimTask instance;
@@ -15,23 +15,39 @@ public class AimTask : MonoBehaviour
     public static int maxTargets = 10;
 
     public GameObject instructionCanvas;
-
     public GameObject gameUICanvas;
+
+    private Vector3 lastPosition;
+    private bool playerMoving = false;
+
+    public GameObject character;
+
+    private Coroutine spawningCoroutine; 
 
     public void Start()
     {
         isTaskStart = false;
         isStartSpawn = false;
         instance = this;
-
+        lastPosition = character.transform.position; 
+        Debug.Log("AimTask started. Waiting for input to begin.");
     }
 
     public void Update()
     {
-        if (isTaskStart == true)
+        if (isTaskStart)
         {
-            // If game has started  & starting point is false
-            if (isStartSpawn != true)
+            if (lastPosition != character.transform.position)
+            {
+                playerMoving = true;  
+            }
+            else
+            {
+                playerMoving = false;  
+            }
+            lastPosition = character.transform.position; 
+
+            if (!isStartSpawn)
             {
                 SpawnTargets();
                 isStartSpawn = true;
@@ -42,37 +58,38 @@ public class AimTask : MonoBehaviour
             isStartSpawn = false;
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                // Press 1 to start the task
                 isTaskStart = true;
                 instructionCanvas.SetActive(false);
                 gameUICanvas.SetActive(true);
             }
-
         }
     }
 
     IEnumerator WaitAndSpawn()
     {
-        // Wait a random period of time from 1s to 3s
         float waitTime = Random.Range(1f, 3f);
-        Debug.Log("Waiting for " + waitTime + " seconds");
+
+        while (!playerMoving)
+        {
+            yield return null; 
+
+
+            lastPosition = character.transform.position; 
+        }
 
         yield return new WaitForSeconds(waitTime);
 
-        // Spawn the target
         targetsShown++;
-        Debug.Log("Spawning target " + targetsShown);
+        Debug.Log("Spawning target " + targetsShown + " at position " + TargetBounds.Instance.GetRandomPosition());
         Instantiate(targetPrefab, TargetBounds.Instance.GetRandomPosition(), Quaternion.identity);
         DataLogger.Instance.StartTiming();
     }
 
+
     public void SpawnTargets()
     {
-        Debug.Log("Spawning targets");
-        // Stop the game once we've shown all the targets
         if (targetsShown >= maxTargets)
         {
-            // End the task and reset the game state
             isTaskStart = false;
             isStartSpawn = false;
             targetsShown = 0;
@@ -83,5 +100,4 @@ public class AimTask : MonoBehaviour
 
         StartCoroutine(WaitAndSpawn());
     }
-
 }

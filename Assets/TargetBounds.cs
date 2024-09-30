@@ -4,34 +4,43 @@ using UnityEngine;
 
 public class TargetBounds : MonoBehaviour
 {
-	public static TargetBounds Instance;
+    public static TargetBounds Instance;
 
-	void Awake()
-	{
-		Instance = this;
-	}
+    public Transform player; 
 
-	[SerializeField] BoxCollider col;
+    [SerializeField] private float distanceInFront = 15f; 
+    [SerializeField] BoxCollider col;
 
-	public Vector3 GetRandomPosition()
-	{
-		Vector3 center = col.center + transform.position;
+    void Awake()
+    {
+        Instance = this;
+    }
 
-		float minX = center.x - col.size.x / 2f;
-		float maxX = center.x + col.size.x / 2f;
+    void Update()
+    {
+		Vector3 newPosition = player.position + player.forward * distanceInFront;
+		transform.position = newPosition; 
+    }
 
-		float minY = center.y - col.size.y / 2f;
-		float maxY = center.y + col.size.y / 2f;
+    public Vector3 GetRandomPosition()
+    {
+        Vector3 center = col.center + transform.position;
 
-		float minZ = center.z - col.size.z / 2f;
-		float maxZ = center.z + col.size.z / 2f;
+        float minX = center.x - col.size.x / 2f;
+        float maxX = center.x + col.size.x / 2f;
 
-		float randomX = Random.Range(minX, maxX);
-		float randomY = Random.Range(minY, maxY);
-		float randomZ = Random.Range(minZ, maxZ);
+        float minY = center.y - col.size.y / 2f;
+        float maxY = center.y + col.size.y / 2f;
 
-		Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
+        float minZ = center.z - col.size.z / 2f;
+        float maxZ = center.z + col.size.z / 2f;
 
-		return randomPosition;
-	}
+        float randomX = Random.Range(minX, maxX);
+        float randomY = Random.Range(minY, maxY);
+        float randomZ = Random.Range(minZ, maxZ);
+
+        Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
+
+        return randomPosition;
+    }
 }
