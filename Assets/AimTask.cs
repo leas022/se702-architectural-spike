@@ -14,12 +14,17 @@ public class AimTask : MonoBehaviour
     public static int targetsHit = 1, targetsMissed = 1, accuracy;
 
     public TextMeshProUGUI TargetsHitLbl, TargetsMissLbl;
-    
+
+    public GameObject instructionCanvas; 
+
+    public GameObject gameUICanvas; 
+
     public void Start()
     {
         isTaskStart = false;
         isStartSpawn = false;
         instance = this;
+
     }
 
     public void Update()
@@ -27,6 +32,9 @@ public class AimTask : MonoBehaviour
         if (isTaskStart == true)
         {
             // If game has started  & starting point is false
+
+            Debug.Log("Next Task Canvas Active: " + instructionCanvas.activeSelf);
+
             if (isStartSpawn != true)
             {
                 SpawnTargets();
@@ -50,6 +58,8 @@ public class AimTask : MonoBehaviour
                 TargetsHitLbl.text = "Hit: 0";
                 TargetsMissLbl.text = "Miss: 0";
                 isTaskStart = true;
+                instructionCanvas.SetActive(false);
+                gameUICanvas.SetActive(true);
             }
 
         }
