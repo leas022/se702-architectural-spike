@@ -24,6 +24,8 @@ To run the Unity project, you’ll need:
 1. Clone this repo and open the project root with Unity Hub. (**Projects** tab → **Add** → **Add project from disk**.)
 1. Once the Unity Editor has loaded in Unity Hub, click **Open** open it with Unity Editor.
 1. Navigate to the [`Scenes/`](/Assets/Scenes/) subfolder, and select either the **Air** or **Water** scene.
+1. The participant can press <kbd>1</kbd> (**not** on the number pad) to start the task.
+1. After a task has been completed, a CSV file will be written to the [`Logging/`](/Logging) folder with the data.
 
 <!-- 👷 Insert runtime information here 🚧 -->
 
